@@ -16,19 +16,20 @@ public enum Hero
 
 public class GameController : MonoBehaviour {
 
-    public CardGenerator cardGenerator;
+    private CardGenerator cardGenerator;
     GameState gameState;
-    Hero hero;//指示当前行动的英雄
+    static public Hero hero;//指示当前行动的英雄
 
     //时间相关
     float cycletime = 60f;
-    float timer;
+    static public float timer;
 
     //当前场上双方的宝可梦集合
     GameObject[] CardA;
     GameObject[] CardB;
 
     int CardReady;
+    static public int CardBnum;
 
     // Use this for initialization
     void Start()
@@ -38,7 +39,7 @@ public class GameController : MonoBehaviour {
         cardGenerator = this.GetComponent<CardGenerator>();//初始化发牌器
         CardReady=0;
         hero = Hero.HeroA;   //从A开始行动
-        timer = 0;
+        CardBnum = 0;
     }
 
     // Update is called once per frame
@@ -48,8 +49,11 @@ public class GameController : MonoBehaviour {
         {
             for (int i = 0; i < 3; i++)
             {
-                cardGenerator.GenerateSkillCard(Hero.HeroA);               
+                print("第" + i + "次给A发牌");
+                cardGenerator.GenerateSkillCard(Hero.HeroA);
+                print("第" + i + "次给B发牌");
                 cardGenerator.GenerateSkillCard(Hero.HeroB);
+
             }
             CardReady = 1;
         }
@@ -67,6 +71,7 @@ public class GameController : MonoBehaviour {
             {
                 print("玩家A行动\n");
                 //找到所有英雄A在场上的牌，让它们都变成可以发动攻击的状态
+                CallA.callflagA = 0;
                 CardA = GameObject.FindGameObjectsWithTag("CardA");                
                 foreach (GameObject i in CardA)
                 {
@@ -78,16 +83,23 @@ public class GameController : MonoBehaviour {
             {
                 print("玩家B行动\n");
                 //找到所有英雄B在场上的牌
+                CallB.callflagB = 0;
                 CardB = GameObject.FindGameObjectsWithTag("CardB");
                 foreach (GameObject i in CardB)
                 {
                     i.GetComponent<BattleB>().flag = 0;
+//                    if (GetComponent<BattleB>().showflag == true)       //oo
+//                       CardBnum++;
                 }
             }
             gameState = GameState.PlayCard;
 
         }
-        if(gameState==GameState.PlayCard)
+        //oo:添加抽牌功能
+//        if(CardBnum<3)
+//            gameObject.GetComponent<CallB>().Call();
+        //Till here
+        if (gameState==GameState.PlayCard)
         {
            if(hero==Hero.HeroA)
             {
@@ -106,7 +118,6 @@ public class GameController : MonoBehaviour {
                     print("玩家A时间用尽\n");
                     gameState = GameState.End;
                 }
-                cardGenerator.CleanUp(hero);
             }
             if (hero == Hero.HeroB)
             {
@@ -122,8 +133,6 @@ public class GameController : MonoBehaviour {
                 }
                 if (timer >= 3*i+2)//所有B类牌都攻击过后，
                     gameState = GameState.End;
-
-                cardGenerator.CleanUp(hero);
             }
                
         }
@@ -155,5 +164,10 @@ public class GameController : MonoBehaviour {
             hero = Hero.HeroA;
     }
 
-   
+   IEnumerator  wait(float time)
+    {
+        print(Time.time);
+        yield return new WaitForSeconds(time);
+        print(Time.time);
+    }
 }
