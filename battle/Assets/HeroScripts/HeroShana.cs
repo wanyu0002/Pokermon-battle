@@ -14,7 +14,7 @@ public class HeroShana : MonoBehaviour {
         HeroName = "莎娜";
         //补充莎娜模型并显示在指定位置
         //给公共两种技能卡数组赋值
-        int[] a = new int[]{ 001, 002, 003, 001, 002, 003 };
+        int[] a = new int[]{ 001, 002, 003, 004, 006, 007 };
         int[] b = new int[] {1, 2, 3, 1, 2, 3, 1, 2,3,1 };
         AddRange(a, b); 
 	}
