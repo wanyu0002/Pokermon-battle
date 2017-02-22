@@ -23,8 +23,10 @@ public class ShowHide : MonoBehaviour
             if (cardx.GetComponent<BattleA>().hp <= 0 && cardx.GetComponent<BattleA>().showflag == true)//若宝可梦被打败
             {
                 cardx.GetComponent<BattleA>().showflag = false;
+                Destroy(cardx.GetComponentsInChildren<Transform>()[9].gameObject);//oo:删除卡牌附带的模型
                 cardx.GetComponent<BattleA>().tag = "temp";           //(oo:更换标签)
                 Destroy(cardx.GetComponent<BattleA>());               //oo:删除卡牌上的脚本
+
 
                 cardx.SetActive(false);
             }

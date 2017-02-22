@@ -2,6 +2,7 @@
 using System.Collections;
 public enum GameState
 {
+    StartGame,
     CardGenerating,//系统随机发放卡牌的阶段
     BeforePlay,//出牌前的程序准备阶段
     PlayCard,//出牌对战阶段
@@ -37,6 +38,7 @@ public class GameController : MonoBehaviour {
        
         timer = 0;//计时器初始化为0 
         cardGenerator = this.GetComponent<CardGenerator>();//初始化发牌器
+        gameState = GameState.StartGame;
         CardReady=0;
         hero = Hero.HeroA;   //从A开始行动
         CardBnum = 0;
@@ -46,7 +48,7 @@ public class GameController : MonoBehaviour {
     void Update()
     {
         if(CardReady==0)
-        {
+        {          
             for (int i = 0; i < 3; i++)
             {
                 print("第" + i + "次给A发牌");
@@ -55,8 +57,20 @@ public class GameController : MonoBehaviour {
                 cardGenerator.GenerateSkillCard(Hero.HeroB);
 
             }
+
             CardReady = 1;
         }
+        if(gameState==GameState.StartGame)
+        {
+
+            timer += Time.deltaTime;
+            if (timer >= 1)
+            {
+                timer = 0;
+                gameState = GameState.CardGenerating;
+            }
+        }
+
         //抽牌阶段
         if (gameState == GameState.CardGenerating)
         {

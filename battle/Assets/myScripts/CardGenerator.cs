@@ -6,8 +6,8 @@ using System.Collections.Generic;
 public class CardGenerator : MonoBehaviour {
 
     // Use this for initialization
-    public List<int> PokemonA = new List<int>();//A持有的宝可梦编号
-    public List<int> PokemonB = new List<int>();//B持有的宝可梦编号
+    public List<string> PokemonA = new List<string>();//A持有的宝可梦编号
+    public List<string> PokemonB = new List<string>();//B持有的宝可梦编号
     public List<int> SkillA = new List<int>();  //A的技能编号
     public List<int> SkillB = new List<int>();  //B的技能编号
     public List<GameObject> CardA = new List<GameObject>();//A的手牌

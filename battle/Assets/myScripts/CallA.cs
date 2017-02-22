@@ -7,7 +7,7 @@ public class CallA : MonoBehaviour
 {
     static public int callflagA;                       //当前召唤次数 
     GameObject[] cardA;
-    static public List<string> picture = new List<string>();
+    static public List<string> picture = new List<string>();    //必须要用string类型，不然很多地方要改= =
     static public int num;                      //图片编号
 
     public bool initialflag;//第一次的初始化
@@ -15,14 +15,16 @@ public class CallA : MonoBehaviour
     void Start()
     {
         cardA = GameObject.FindGameObjectsWithTag("CardA");
-/*        foreach (int item in (GameObject.Find("HeroA").GetComponent<HeroShana>().Pokemon))
-            picture.Add(item.ToString());*/
-        picture.Add("001");
-        picture.Add("002");
-        picture.Add("003");
-        picture.Add("004");
-        picture.Add("006");
-        picture.Add("007");
+//        foreach (string item in GameObject.Find("HeroA").GetComponent<HeroShana>().Pokemon)
+//        {
+//            picture.Add(item);
+//        }
+        //       picture.Add("001");
+          //      picture.Add("002");
+            //    picture.Add("003");
+              //  picture.Add("004");
+        //        picture.Add("006");
+        //        picture.Add("007");
         num = (int)UnityEngine.Random.Range(0, picture.Count);    //  Random.Range()包前不包后
         callflagA = 0;
         initialflag = false;
@@ -30,12 +32,16 @@ public class CallA : MonoBehaviour
 
     void Update()
     {
-        if(initialflag==false)             //第一次读取前三张卡牌
+        foreach (string item in GameObject.Find("HeroA").GetComponent<HeroShana>().Pokemon)
+            picture.Add(item);
+//        picture = GameObject.Find("HeroA").GetComponent<HeroShana>().Pokemon;
+        if (initialflag==false)             //第一次读取前三张卡牌
         {
+
             foreach(GameObject cardx in cardA)
             {
                 cardx.AddComponent(Type.GetType("Poke" + picture[num].ToString()));
-                cardx.GetComponent<BattleA>().GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/" + picture[num].ToString(), typeof(Texture2D));
+                cardx.GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/" + picture[num].ToString(), typeof(Texture2D));
                 picture.RemoveAt(num);
                 num = (int)UnityEngine.Random.Range(0, picture.Count);
             }
@@ -70,6 +76,9 @@ public class CallA : MonoBehaviour
                             cardx.GetComponent<BattleA>().showflag = true;
                             cardx.GetComponent<BattleA>().tag = "CardA";
                             cardx.GetComponent<BattleA>().flag = 1;                                 //(oo:new)
+                            GameObject model = Instantiate(Resources.Load("PokemonModels/"+"model" + picture[num].ToString()) as GameObject);//添加模型
+                            model.transform.position = cardx.transform.position;
+                            model.transform.parent = cardx.transform;
                             print("召唤神奇宝贝！");
                             callflagA++;
                             Invoke("Update", 5f);

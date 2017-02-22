@@ -6,7 +6,7 @@ public class HeroShana : MonoBehaviour {
 
     string HeroName;
     public GameObject HeroModel;
-    public  List<int> Pokemon=new List<int>();//持有的宝可梦编号
+    public  List<string> Pokemon=new List<string>();//持有的宝可梦编号
     public  List<int> Skill = new List<int>();  //技能编号,公共技能和专属技能写在一起    
 	// Use this for initialization
 	void Start ()
@@ -14,7 +14,13 @@ public class HeroShana : MonoBehaviour {
         HeroName = "莎娜";
         //补充莎娜模型并显示在指定位置
         //给公共两种技能卡数组赋值
-        int[] a = new int[]{ 001, 002, 003, 004, 006, 007 };
+        Pokemon.Add("001");
+        Pokemon.Add("002");
+        Pokemon.Add("003");
+        Pokemon.Add("001");
+        Pokemon.Add("002");
+        Pokemon.Add("003");
+        string[] a = new string[]{ "001","004","007","017","071","100" };
         int[] b = new int[] {1, 2, 3, 1, 2, 3, 1, 2,3,1 };
         AddRange(a, b); 
 	}
@@ -23,9 +29,9 @@ public class HeroShana : MonoBehaviour {
 	void Update () {
 	
 	}
-    void AddRange(int[] a,int[] b)
+    void AddRange(string[] a,int[] b)
     {
-        Pokemon.AddRange(a);
+        //Pokemon.AddRange(a);
         Skill.AddRange(b);
     }
 }
