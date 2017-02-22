@@ -7,8 +7,9 @@ public class Poke003 : BattleA {
     public override void setSingle()
     {       
         attack = 7;
-        hp = 10;       
-//        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/003", typeof(Texture2D));
+        hp = 10;
+        flag = 1;
+        //        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/003", typeof(Texture2D));
 
     }
 

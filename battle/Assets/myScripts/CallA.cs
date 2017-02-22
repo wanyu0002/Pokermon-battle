@@ -15,16 +15,6 @@ public class CallA : MonoBehaviour
     void Start()
     {
         cardA = GameObject.FindGameObjectsWithTag("CardA");
-//        foreach (string item in GameObject.Find("HeroA").GetComponent<HeroShana>().Pokemon)
-//        {
-//            picture.Add(item);
-//        }
-        //       picture.Add("001");
-          //      picture.Add("002");
-            //    picture.Add("003");
-              //  picture.Add("004");
-        //        picture.Add("006");
-        //        picture.Add("007");
         num = (int)UnityEngine.Random.Range(0, picture.Count);    //  Random.Range()包前不包后
         callflagA = 0;
         initialflag = false;
@@ -62,7 +52,7 @@ public class CallA : MonoBehaviour
                         {
                             
                             cardx.AddComponent(Type.GetType("Poke" + picture[num].ToString()));   //添加脚本
-                            cardx.GetComponent<BattleA>().hp += 20;
+                            cardx.GetComponent<BattleA>().hp += 200;                              //不能删掉，用来保证hp>0才能出现牌
                             //卡牌上数值要保持的更新
                             cardx.GetComponent<BattleA>().GetComponentsInChildren<UILabel>()[1].text = cardx.GetComponent<BattleA>().hp.ToString();
                             //贴图改变
