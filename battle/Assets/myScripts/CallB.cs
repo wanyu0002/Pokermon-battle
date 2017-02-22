@@ -48,9 +48,9 @@ public class CallB : MonoBehaviour
             {
                 if (cardnumberB != 3 && GameController.timer > 1.5f && GameController.hero == Hero.HeroB)
                 {
-                    if (GameController.hero == Hero.HeroB && (cardy.GetComponent<BattleB>().hp <= 0) && cardy.GetComponent<BattleB>().showflag == false && callflagB == 0)    //如果碰撞的点所在的物体的名字是“StartButton”(collider就是检测碰撞所需的碰撞器)
+                    if (GameController.hero == Hero.HeroB && cardy.tag == "temp" && callflagB == 0)  
                     {
-                        cardy.GetComponent<BattleB>().hp += 20;
+                        cardy.GetComponent<BattleB>().hp += 10;
                         //卡牌上数值要保持的更新
                         cardy.GetComponent<BattleB>().GetComponentsInChildren<UILabel>()[1].text = cardy.GetComponent<BattleB>().hp.ToString();
                         //贴图改变
@@ -68,7 +68,7 @@ public class CallB : MonoBehaviour
                         cardy.GetComponent<BattleB>().showflag = true;
                         cardy.GetComponent<BattleB>().tag = "CardB";
                         cardy.GetComponent<BattleB>().flag = 1;
-                        cardy.AddComponent<BattleB>();   //添加脚本
+//                        cardy.AddComponent<BattleB>();   //暂时隐藏：添加脚本
                         print("召唤神奇宝贝！");
                         callflagB++;
                         cardnumberB++;

@@ -24,21 +24,20 @@ public class ShowHide : MonoBehaviour
             {
                 cardx.GetComponent<BattleA>().showflag = false;
                 Destroy(cardx.GetComponentsInChildren<Transform>()[9].gameObject);//oo:删除卡牌附带的模型
-                cardx.GetComponent<BattleA>().tag = "temp";           //(oo:更换标签)
-                Destroy(cardx.GetComponent<BattleA>());               //oo:删除卡牌上的脚本
-
-
+                cardx.GetComponent<BattleA>().tag = "temp";             //(oo:更换标签)
+                Destroy(cardx.GetComponent<BattleA>());                 //oo:删除卡牌上的脚本
                 cardx.SetActive(false);
             }
         }
         foreach (GameObject cardy in cardB)
             if (cardy.GetComponent<BattleB>().hp <= 0 && cardy.GetComponent<BattleB>().showflag == true)//若宝可梦被打败
             {
-                CallB.cardnumberB--;                    //oo
-                print(CallB.cardnumberB + "次数!!!");
-                cardy.SetActive(false);
+                CallB.cardnumberB--;                                    //卡牌B比A需要多判断在场卡牌数
                 cardy.GetComponent<BattleB>().showflag = false;
+//                Destroy(cardy.GetComponentsInChildren<Transform>()[9].gameObject);//暂时隐藏：删除卡牌附带的模型
                 cardy.GetComponent<BattleB>().tag = "temp";
+//                Destroy(cardy.GetComponent<BattleB>());                 //暂时隐藏：删除卡牌上的脚本
+                cardy.SetActive(false);
             }
     }
 }
