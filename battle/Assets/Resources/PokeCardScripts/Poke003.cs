@@ -8,7 +8,7 @@ public class Poke003 : BattleA {
     {       
         attack = 7;
         hp = 10;       
-        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/003", typeof(Texture2D));
+//        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/003", typeof(Texture2D));
 
     }
 

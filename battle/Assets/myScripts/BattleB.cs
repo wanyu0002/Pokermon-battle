@@ -12,8 +12,8 @@ public class BattleB : MonoBehaviour {
         //攻击力和血量在一定范围内随机
         showflag = true;
         attack =Random.Range(2,4);
-        flag = 1;
-        hp = Random.Range(8,18);
+        flag = 0;
+        hp = Random.Range(8,18);//8，,18
         //牌面数值改变
         this.GetComponentsInChildren<UILabel>()[0].text = attack.ToString();
         this.GetComponentsInChildren<UILabel>()[1].text = hp.ToString();
@@ -23,11 +23,9 @@ public class BattleB : MonoBehaviour {
      
         if (hp <= 0)
         {
-            print(name + "被击败\n");            
-            
+            print(name + "被击败\n");
+//          this.gameObject.SetActive(false);          
         }
-        this.GetComponentsInChildren<UILabel>()[1].text = hp.ToString();
-        this.GetComponentsInChildren<UILabel>()[0].text = attack.ToString();
     }
     //作为对手，自动选择对手攻击
     public void fight()
@@ -52,8 +50,8 @@ public class BattleB : MonoBehaviour {
         hp -= CardA[minNum].GetComponent<BattleA>().attack;
         CardA[minNum].GetComponent<BattleA>().hp -= attack;
         //牌面数值改变
-        //this.GetComponentsInChildren<UILabel>()[1].text = hp.ToString();
-       // CardA[minNum].GetComponentsInChildren<UILabel>()[1].text = CardA[minNum].GetComponent<BattleA>().hp.ToString();
+        this.GetComponentsInChildren<UILabel>()[1].text = hp.ToString();
+        CardA[minNum].GetComponentsInChildren<UILabel>()[1].text = CardA[minNum].GetComponent<BattleA>().hp.ToString();
 
             //增加攻击动画
          GameObject old = new GameObject();
@@ -76,9 +74,4 @@ public class BattleB : MonoBehaviour {
         flag = 0;
     }
 
-    public void ChangeNumber(int attackChange, int hpChange)
-    {
-        attack += attackChange;
-        hp += hpChange;
-    }
 }

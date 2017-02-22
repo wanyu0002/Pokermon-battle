@@ -10,7 +10,7 @@ public class Poke001 : BattleA
       
         attack = 2;
         hp = 4;
-        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/001", typeof(Texture2D));
+//        GetComponentsInChildren<Renderer>()[0].material.mainTexture = (Texture)Resources.Load("PokeCardPictures/001", typeof(Texture2D));
 
     }
     
